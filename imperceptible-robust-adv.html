@@ -1,0 +1,895 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0030)http://cseweb.ucsd.edu/~bisai/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__cseweb_ucsd_edu"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--<base target="_blank">--><base href="." target="_blank">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    
+    <title>Imperceptible, Robust and Targeted Adversarial Examples for Automatic Speech Recognition</title>
+    <style>
+        div.container {
+          padding-left: 1em;
+          padding-right: 1em;
+          color: #222;
+          padding-top: 1.5em;
+      }
+      
+      
+      div.outer {
+          margin-left: auto;
+          margin-right: auto;
+          padding-bottom: 1em;
+          max-width: 60em;
+      }
+      
+      div.top {
+          max-width: 60em;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      
+      div.topouter {
+          width: 100%;
+          min-height: 1.5em;
+          padding: 1em;
+          z-index: 10;
+          background: #FFF;
+          border-bottom: 1px solid #D0D0D0;
+          box-shadow: 0 0 12px rgba(0,0,0,.1);
+      }
+      
+      div.links a {
+          margin-right: .8em;
+      }
+      
+      a.button {
+          display: inline-block;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: middle;
+          border: 1px solid #000;
+          border-radius: .25em;
+          padding: .2em .4em;
+          color: #fff;
+          background: #633;
+          transition: .5s;
+      }
+      
+      a.button:hover {
+          color: #fff;
+          background: #844;
+          transition: .5s;
+      }
+      
+      
+      div.title {
+          margin-right: 4em;
+          font-size: 150%;
+          float: left;
+      }
+      
+      div.links {
+          float: right;
+          font-size: 120%;
+          padding-right: 2em;
+      }
+      
+      
+      div.boxed {
+          border-radius: 5px;
+          background: #FFFFFF;
+          padding: 1em;
+          border-bottom: 1px solid #D0D0D0;
+          border-right: 1px solid #D0D0D0;
+          box-shadow:0 0 12px rgba(0,0,0,0.1);
+          -moz-box-shadow:0 0 12px rgba(0,0,0,0.1);
+          -webkit-box-shadow:0 0 12px rgba(0,0,0,0.1);
+      }
+      
+      div.header {
+          border-bottom: #DDDDDD solid 2px;
+          padding-bottom: .5em;
+          padding-top: .2em;
+          line-height: 100%;
+          font-size: 2em;
+      }
+      
+      span.header {
+          font-size: 1.5em;
+          line-height: 100%;
+      }
+      
+      p {
+          margin-top: 0px;
+          margin-bottom: .7em;
+      }
+      
+      li {
+          padding-bottom: 1em;
+      }
+      
+      div.inner {
+          padding-top: .5em;
+          width: 100%;
+          font-size: 14pt;
+          transform: rotate(0deg);
+          position: relative;
+      }
+      
+      
+      div.footer {
+          text-align: center;
+          padding-top: 3em;
+          font-size: 0.5em;
+      }
+      
+      div.rightouter {
+          width: 18em; 
+          display: inline; 
+          float: right;
+      }
+      
+      div.contact {
+          display: none;
+      }
+      
+      div.rightinner {
+          padding-left: 10px;
+      }
+      
+      div.rightelement {
+          background: #F8F8F8;
+          padding: 10px;
+          border-radius: 4px;
+          border-bottom: 1px solid #D0D0D0;
+          border-right: 1px solid #D0D0D0;
+          box-shadow:0 0 6px rgba(0,0,0,0.1);
+          -moz-box-shadow:0 0 6px rgba(0,0,0,0.1);
+          -webkit-box-shadow:0 0 6px rgba(0,0,0,0.1);
+          width: 16em;
+          align: right;
+      }
+      
+      div.rightelement img {
+          border-radius: 5%;
+      }
+      
+      div.contact img {
+          border-radius: 5%;
+      }
+      
+      label {
+          cursor: pointer;
+      }
+      
+      div.publication label {
+          float: right;
+      }
+      
+      div.pubstuff {
+          float: right;
+      }
+      
+      
+      div.righthead {
+          font-size: 24px;
+      }
+      
+      a {
+          text-decoration: none;
+          color: #A02020;
+      }
+      
+      a:hover {
+          color: #C03030;
+      }
+      
+    
+      
+      div.publication p {
+          margin-top: 0px;
+          margin-bottom: .4em;
+      }
+      
+      div.publication > p:first-child {
+          margin-right: 10em;
+      }
+      
+      span.rightlinks {
+          float: right;
+      }
+      
+      div.menuwrap {
+          
+      }
+      
+      div.menu {
+          background: #f8f8f8; 
+          box-shadow: 2px -2px 2px rgba(0,0,0,0.1); 
+          -moz-box-shadow: 2px -2px 2px rgba(0,0,0,0.1);
+          -webkit-box-shadow: 2px -2px 2px rgba(0,0,0,0.1);
+          margin-left: 0.5em; 
+          width: 6em; 
+          float: left; 
+          padding: 0.2em; 
+          border-radius: 10px 10px 0px 0px; 
+          font-size: 14pt; 
+          text-align: center;
+      }
+      
+      
+      div.video iframe {
+          width: 480px;
+          height: 270px;
+      }
+      
+      div.video video {
+          width: 480px;
+          height: 270px;
+      }
+      
+      div.video img {
+          width: 480px;
+          height: 270px;
+      }
+      
+      div.bar {
+          display: none;
+      }
+      
+      @media all and (max-width: 40em) {
+      
+          div.menu {
+        width: 3.4em;
+        font-size: 12pt;
+          }
+          div.boxed {
+        padding: .5em;
+          }
+      
+          div.links {
+              position: absolute;
+              right: 0em;
+          }
+          
+          div.rightouter {
+        display: none;
+          }
+          div.contact {
+        display: block;
+              text-align: center;
+          }
+      
+          div.bars {
+              cursor: pointer;
+              float: right;
+          }
+          
+          div.bar {
+              display: block;
+              width: 28px;
+              height: 3px;
+              background-color: #000;
+          }
+          
+          div.bar ~ div.bar {
+              margin: 5px 0;
+          }
+      
+          div.dropdown {
+              position: absolute;
+              right: 1em;
+              top: 1.5em;
+              width: 5em;
+              padding: .5em;
+              background: #fff;
+              border: 1px solid rgba(30, 30, 30, .5);
+              z-index: 20;
+              border-radius: .5em;
+          }
+          div.dropdown a {
+              display: block;
+          }
+          input[type=checkbox]:checked ~ div.dropdown  {
+              display: none;
+          }
+      
+          div.publication label {
+        float: left;
+          }
+          
+          span.rightlinks {
+        float: left;
+        width: 100%;
+        padding-left: 1em;
+        border-left: 1px solid #aaa;
+        order: 2;
+          }
+      
+          div.publication div {
+        order: 3;
+          }
+          div.publication p {
+        order: 3;
+          }
+          
+          div.publication > p {
+        order: 1;
+        padding-left: 1em;
+        border-left: 1px solid #aaa;
+          }
+      
+          div.publication > div.stuff > p:first-child {
+        padding-left: 0;
+        border-left: none;
+          }
+      
+          div.publication {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #aaa;
+          }
+          
+          .abstract {
+        padding-right: 1em;
+        padding-left: 1em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+          }
+      
+      
+          div.video {
+        float: none !important;
+        padding-left: 0em;
+        padding-top: 60%;
+        position: relative;
+        margin-bottom: 1em;
+          }
+          
+          div.video iframe {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+          }
+          
+          div.video video {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+          }
+          
+      }
+      
+      span.footnote {
+          position: relative;
+          width: 0px;
+          margin-left: -.3em;
+      }
+      
+      span.footnote > a:first-child {
+          vertical-align: super;
+          font-size: .7em;
+          line-height: 100%;
+          margin-left: 2px;
+      }
+      
+      .footnote_content {
+          padding: .2em;
+          margin: 0px;
+          background: #ffffff;
+          opacity: 0.95;
+          left: 3em;
+          border: #aaa 1px solid;
+          display: block;
+          position: fixed;
+          left: 0px;
+          margin-left: 1em;
+          margin-right: 1em;
+          width: calc(100% - 2em);
+          border-radius: 2px;
+          visibility: hidden;
+          transition: 0.2s 1s;
+          box-shadow: 0px 2px 10px 2px rgba(0,0,0,.25);
+          z-index: 100;
+      }
+      
+      @media all and (max-width: 40em) {
+          .footnote_content {
+        transition: 0s;
+          }
+      }
+      
+      .footnote:hover .footnote_content  {
+          visibility: visible;
+          transition-delay: 0s;
+      }
+      
+      input[type=checkbox] {
+          display: none;
+      }
+      
+      input[type=checkbox]:checked ~ .abstract  {
+          display: none;
+      }
+      
+      input[type=radio] {
+          display: none;
+      }
+      
+      input[type=radio]:not(:checked) ~ .abstract  {
+          display: none;
+      }
+      
+      span.award {
+          background: #ffb;
+          border-radius: 3px;
+          font-weight: bold;
+      }
+      
+      span.subaward {
+          font-weight: bold;
+      }
+      
+      
+      span.me {
+          font-weight: bold;
+      }
+      
+      div.video {
+          padding-left: 1em;
+          padding-right: 1em;
+      }
+      
+      hr {
+          display: block;
+          border-style: inset;
+          border-width: 1px;
+          margin-block-start: 0.5em;
+          margin-block-end: 0.5em;
+          margin-inline-start: 0.5em;
+          margin-inline-end: 0.5em;
+          border-top: solid 1px rgba(0, 0, 0, .2);
+          border-left: transparent;
+          border-right: transparent;
+      }
+      
+      .blink {
+        animation: blinker 1s step-start infinite;
+      }
+      
+      @keyframes blinker {
+         50% {
+          opacity: 0;
+        }
+      }
+    </style>
+    <link href="./im_files/bootstrap.min.css" rel="stylesheet">
+    <link href="./im_files/css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="./im_files/style.css">
+    <link rel="stylesheet" type="text/css" href="./im_files/my.css">
+    <!-- <link href="css/agency.css" rel="stylesheet"> -->
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-gr-c-s-loaded="true">
+    <div id="bg">
+      <div id="outer">
+        <div id="header">
+          <div id="logo">
+            <!-- <a href="https://arxiv.org/abs/1903.10346"> -->
+            <!-- <h1> -->
+                <!-- <font size="6.8">Imperceptible, Robust and Targeted </font>   </h1> -->
+            <!-- <h1><font size="6.8">Adversarial Examples for Automatic Speech Recognition </font>  </h1></a> -->
+            <h1 style="font-size:30pt"><a href="https://arxiv.org/abs/1903.10346"> Imperceptible, Robust and Targeted <br/> Adversarial Examples for Automatic Speech Recognition  </a></h1>
+             <h3 style="font-size:15pt"><a href="http://cseweb.ucsd.edu/~yaq007/">Yao Qin</a><sup>1</sup>, <a href=https://nicholas.carlini.com/>Nicholas Carlini</a><sup>2</sup>, <a href=https://www.iangoodfellow.com/>Ian Goodfellow</a><sup>2</sup>, <a href="http://cseweb.ucsd.edu/users/gary/">Garrison Cottrell</a><sup>1</sup>, <a href=https://colinraffel.com/>Colin Raffel</a><sup>2</sup></h3>
+             <h3 style="margin-top:10px; font-size:15pt"><sup>1</sup>University of California San Diego, <sup>2</sup>Google Brain </h3>
+          
+              <!-- </a> -->
+          
+          </div>
+        
+        </div>
+
+        <!-- <div>
+          <div id="logo">
+          <h3>
+            Univer
+          </h3>
+        </div>
+</div> -->
+ 
+
+
+       
+          
+
+        <div id="main">
+          <div id="content">
+            <div id="box1" class="box">
+              <h2>
+                Abstract
+              </h2>
+              <p>
+              Adversarial examples are inputs to machine learning models designed by an adversary to cause an incorrect output. In this work, we perform white-box attack to the state-of-the-art <a href="https://arxiv.org/abs/1902.08295"><strong><font color="darkred">Lingvo</font></strong></a> automatic speech recognition (ASR) system in the <a href="https://www.danielpovey.com/files/2015_icassp_librispeech.pdf"><strong><font color="darkred">LibriSpeech</font></strong></a> test dataset. First, we develop <em><strong>effectively imperceptible</strong></em> audio adversarial examples
+(verified through a human study)
+by leveraging the psychoacoustic principle of auditory masking, 
+while retaining 100% targeted success rate
+on arbitrary full-sentence targets. Next, we make progress towards physical-world over-the-air audio adversarial examples by
+constructing perturbations which remain effective even after applying
+realistic simulated
+environmental distortions. The details of the algorithms can be found in <a href="https://arxiv.org/abs/1903.10346"><strong><font color="darkred">our paper</font></strong></a> and the implementations can be found <a href="hhttps://github.com/yaq007/cleverhans/tree/master/examples/adversarial_asr"><strong><font color="darkred">here</font></strong></a>.
+              </p>
+              
+
+            </div>
+
+            <div id="box1" class="box">
+              <h2>
+                Imperceptible Adversarial Examples
+              </h2>
+              <p>
+              To construct imperceptible adversarial examples for automatic speech recognition system, we use <a href="https://en.wikipedia.org/wiki/Auditory_masking"><strong><em><font color="darkred">frequency masking</font></em></strong></a>, which refers to the phenomenon that a louder signal can make other signals at nearby frequencies imperceptible. We display two sets of audio examples below. In each set, there is a clean audio, an adversarial example generated by <a href="https://arxiv.org/abs/1801.01944"><strong><font color="darkred">Carlini’s method</font></strong></a> and our constructed imperceptible adversarial example. Listen to them carefully and choose which one is the clean audio.
+              </p>
+              <p>
+                <font size=5><strong>First Set</strong></font>
+              </p>
+               <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/imperceptible/example0/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio1" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio1" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio:</strong> “The sight of you bartley to see you living and happy and successful can I never make you understand what that means to me”
+              </span>           
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible/example0/Carlini.wav">
+              </audio>
+              <label for="audio2" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio2" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong>Carlini’s adversarial example:</strong> “Hers happened to be in the same frame too but she evidently didn’t 
+                     care about that”
+” 
+              </span>
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible/example0/imperceptible.wav">
+              </audio>
+              <label for="audio3" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio3" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                            <br><strong>Our imperceptible adversarial example:</strong> “Hers happened to be in the same frame too but she evidently didn’t 
+                     care about that”
+              </span>
+            </div>    
+            
+            <br>
+            <p>
+                <font size=5pt><strong>Second Set</strong></font>
+              </p>
+               
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible/example1/Carlini.wav">
+              </audio>
+              <label for="audio5" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio5" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong> Carlini's adversarial example:</strong> “This was so sweet a lady sir and in some manner i do think she died”
+” 
+              </span>
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible/example1/imperceptible.wav">
+              </audio>
+              <label for="audio6" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio6" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                            <br><strong>Our imperceptible adversarial example:</strong> “This was so sweet a lady sir and in some manner i do think she died”
+              </span>
+            </div>  
+            <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/imperceptible/example1/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio4" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio4" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio:</strong> “And to think we can save all that misery and despair by the payment of a hundred and fifty dollars”
+              </span>           
+            </div>
+            </div>
+
+<div id="box1" class="box">
+              <h2>
+                Robust Adversarial Examples
+              </h2>
+              <p>
+              Carlini’s adversarial examples and our constructed imperceptible adversarial examples can not work while playing over-the-air. In order to improve the robustness of adversarial examples when playing over-the-air, we use the <a href="https://pdfs.semanticscholar.org/1182/8b545524ae714aa7e527d42ed08e4d126655.pdf"><strong><font color="darkred">Image Source Method</font></strong></a> to create the room impulse responses based on the room configurations (<em>e.g.</em>, the room dimension, source audio and target microphone’s location). Then we convolve the room impulse responses with the audio to create artificial utterances (speech with reverberations) that mimic playing the audio over-the-air. Here is an example of a clean audio and its corresponding simulated audio with room reverberation.
+              </p>
+              
+               <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/robust/example0/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio7" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio7" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio:</strong> “The more she is engaged in her proper duties the less leisure will she have for it even as an accomplishment and a recreation”
+              </span>           
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/robust/example0/simulated-clean.wav">
+              </audio>
+              <label for="audio8" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio8" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong>Simulated clean audio with reverberation:</strong> “The more she is engaged in her proper duties the less leisure will she have for it even as an accomplishment and a recreation” 
+              </span>
+            </div>
+
+            <p>
+              <br>
+              To make the generated adversarial examples robust to various environments, we consider a challenging setting that the exact configuration of the room in which the attack will be performed is unknown. Instead, we are only aware of the distribution from which the room configuration will be drawn. First, we generate 1000 random room configurations sampled from the distribution as the training room set. The test room set includes another 100 random room configurations sampled from the same distribution. The constructed robust adversarial examples can achieve over 60% attack success rate in the 100 test rooms. Below are two audio samples. One of them is the clean audio simulated playing over-the-air in one test room and another one is our constructed robust adversarial example simulated playing in the same test room. We can clearly hear the noise in the background in the robust adversarial example.
+            </p>
+
+            <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/robust/example1/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio9" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio9" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio with reverberation:</strong> “Old dances are simplified of their yearning bleached by time”
+              </span>           
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/robust/example1/robust_adv.wav">
+              </audio>
+              <label for="audio10" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio10" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong>Robust adversarial example with reverberation:</strong> “You don't seem to realize the position” 
+              </span>
+            </div>
+
+            </div>
+              
+
+
+
+            <div id="box1" class="box">
+              <h2>
+                Imperceptible & Robust Attacks
+              </h2>
+              <p>
+              By combining both of the techniques we developed above, we can generate both imperceptible and robust adversarial examples, which can achieve around 50% attack success rate in 100 simulated test rooms. Here we display four sets. Each set includes three audio samples convolved with the same simulated room reverberation. One is the clean audio, the others are a robust adversarial example and an imperceptible and robust adversarial example. Listen to them carefully, you should be able to hear the obvious noise in the background in the robust adversarial example. The imperceptible and robust adversarial example is much less imperceptible compared to the robust adversarial example, but can still be differentiated from the clean audio. 
+              </p>
+              
+               <p>
+                <font size=5><strong>First Set</strong></font>
+              </p>
+               <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example0/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio11" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio11" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio:</strong> “It is so made that everywhere we feel the sense of punishment”
+              </span>           
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example0/robust_adv.wav">
+              </audio>
+              <label for="audio12" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio12" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong>Robust adversarial example:</strong> “Said missus horton a few minutes after”
+              </span>
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example0/robust_imperceptible_adv.wav">
+              </audio>
+              <label for="audio13" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio13" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                            <br><strong>Imperceptible and robust adversarial example:</strong> “Said missus horton a few minutes after”
+              </span>
+            </div> 
+            <p>
+              <br>
+                <font size=5><strong>Second Set</strong></font>
+              </p>
+
+              <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example1/robust_adv.wav">
+              </audio>
+              <label for="audio15" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio15" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong>Robust adversarial example:</strong> “If spoken to she would not speak again”
+              </span>
+            </div>
+
+               <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example1/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio14" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio14" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio:</strong> “Come and get the boolooroo she said going toward the benches”
+              </span>           
+            </div>
+
+            
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example1/robust_imperceptible_adv.wav">
+              </audio>
+              <label for="audio16" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio16" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                            <br><strong>Imperceptible and robust adversarial example:</strong> “If spoken to she would not speak again”
+              </span>
+            </div> 
+
+            <p>
+              <br>
+                <font size=5><strong>Third Set</strong></font>
+              </p>
+
+              <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example2/robust_imperceptible_adv.wav">
+              </audio>
+              <label for="audio19" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio19" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                            <br><strong>Imperceptible and robust adversarial example:</strong> “I suppose that's the wet season too then”
+              </span>
+            </div> 
+               <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example2/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio17" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio17" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio:</strong> “Were i in the warm room with all the splendor and magnificence”
+              </span>           
+            </div>
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example2/robust_adv.wav">
+              </audio>
+              <label for="audio18" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio18" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong>Robust adversarial example:</strong> “I suppose that's the wet season too then”
+              </span>
+            </div>
+
+            
+
+            <p>
+              <br>
+                <font size=5><strong>Fourth Set</strong></font>
+              </p>
+               
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example3/robust_adv.wav">
+              </audio>
+              <label for="audio28" style="float: none; position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio28" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em; ">
+                <br><strong>Robust adversarial example:</strong> “A terrible thought flashed into my mind”
+              </span>
+            </div>
+
+            <div>
+
+            
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example3/clean.wav">
+
+              </audio>
+              <!-- [<strong>Clean audio</strong>] -->
+             <label for="audio27" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>  
+              <input checked="checked" id="audio27" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                <br><strong>Clean audio:</strong> “He's another who's awfully keen about her let me introduce you”
+              </span>           
+            </div>
+
+
+            <div>
+              <audio controls="controls">
+                <source src="./audios/imperceptible-robust/example3/robust_imperceptible_adv.wav">
+              </audio>
+              <label for="audio29" style="float: none;position: relative; top: -1em"><font color="darkred">[Reveal Transcription]</font></label>
+              <input checked="checked" id="audio29" type="checkbox">
+              <span class="abstract" style="position: relative; top: -.6em; padding-left: 0em;">
+                            <br><strong>Imperceptible and robust adversarial example:</strong> “A terrible thought flashed into my mind”
+              </span>
+            </div> 
+
+
+     
+
+
+
+            </div>
+
+
+            <!-- <br class="clear"> -->
+          </div>
+          
+     
+
+
+
+
+
+      <div id="copyright">
+        <br>
+        © Yao Qin 2019	
+      </div>
+    </div>
+  
+
+</body></html>
