@@ -121,6 +121,20 @@
     <img src="SB/5.JPG" alt="Santa Barbara 5" />
   </div>
 
+  <h2>Amsterdam Zaanse Schans</h2>
+  <div class="gallery-container" id="amsterdam-gallery">
+    <img src="Amsterdam/1.JPG" alt="Amsterdam 1" />
+    <img src="Amsterdam/2.JPG" alt="Amsterdam 2" />
+    <img src="Amsterdam/3.JPG" alt="Amsterdam 3" />
+    <img src="Amsterdam/4.JPG" alt="Amsterdam 4" />
+    <img src="Amsterdam/5.JPG" alt="Amsterdam 5" />
+    <img src="Amsterdam/6.JPG" alt="Amsterdam 6" />
+    <img src="Amsterdam/7.JPG" alt="Amsterdam 7" />
+    <img src="Amsterdam/8.JPG" alt="Amsterdam 8" />
+    <img src="Amsterdam/9.JPG" alt="Amsterdam 9" />
+    <img src="Amsterdam/10.JPG" alt="Amsterdam 10" />
+  </div>
+
   <dialog id="lightbox">
     <div class="modal-content">
       <img id="modal-img" src="" alt="preview" />
@@ -129,7 +143,7 @@
   </dialog>
 
   <script>
-    const images = Array.from(document.querySelectorAll("#gallery img"));
+    const images = Array.from(document.querySelectorAll(".gallery-container img"));
     const lightbox = document.getElementById("lightbox");
     const modalImg = document.getElementById("modal-img");
     let currentIndex = 0;
