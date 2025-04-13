@@ -5,7 +5,7 @@
   <title>Yao Qin's Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ✅ Lightbox2 CSS (working CDN) -->
+  <!-- Lightbox2 CSS from jsDelivr (working CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
 
   <style>
@@ -16,19 +16,16 @@
       margin: auto;
       background: #fff;
     }
-
     h2 {
       text-align: center;
       margin-bottom: 40px;
       font-size: 2rem;
     }
-
     .gallery-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
     }
-
     .gallery-container a {
       display: block;
       width: 100%;
@@ -38,20 +35,17 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s ease-in-out;
     }
-
     .gallery-container a:hover {
       transform: scale(1.03);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
-
     .gallery-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-
-    /* ✅ Force nav arrows to be visible */
+    /* Force Lightbox navigation arrows to be visible */
     .lightbox .lb-nav a.lb-prev,
     .lightbox .lb-nav a.lb-next {
       opacity: 1 !important;
@@ -86,7 +80,7 @@
     </a>
   </div>
 
-  <!-- ✅ Lightbox2 JS (working CDN) -->
+  <!-- Lightbox2 JS from jsDelivr -->
   <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
   <script>
     lightbox.option({
