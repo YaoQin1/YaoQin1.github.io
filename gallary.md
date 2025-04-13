@@ -38,13 +38,13 @@ permalink: /gallery/
 <h2>Santa Barbara Beaches at Sunset!</h2>
 
 <div class="gallery-container">
-  <a href="/gallary/SB/1.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 1">
-    <img src="/gallary/SB/1.JPG" alt="Photo 1">
+  <a href="/gallery/SB/1.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 1">
+    <img src="/gallery/SB/1.JPG" alt="Photo 1">
   </a>
-  <a href="/gallary/SB/2.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 2">
-    <img src="/gallary/SB/2.JPG" alt="Photo 2">
+  <a href="/gallery/SB/2.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 2">
+    <img src="/gallery/SB/2.JPG" alt="Photo 2">
   </a>
-  <a href="/gallary/SB/3.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 3">
-    <img src="/gallary/SB/3.JPG" alt="Photo 3">
+  <a href="/gallery/SB/3.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 3">
+    <img src="/gallery/SB/3.JPG" alt="Photo 3">
   </a>
 </div>
