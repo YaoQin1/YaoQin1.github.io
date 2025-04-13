@@ -51,6 +51,12 @@
       display: block;
     }
   </style>
+  <style>
+  .lightbox .lb-nav a.lb-prev,
+  .lightbox .lb-nav a.lb-next {
+    opacity: 1 !important;
+  }
+</style>
 </head>
 
 <body>
@@ -82,5 +88,13 @@
 
   <!-- Lightbox2 JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <script>
+  lightbox.option({
+    'resizeDuration': 200,
+    'wrapAround': true,
+    'alwaysShowNavOnTouchDevices': true
+  })
+</script>
+
 </body>
 </html>
