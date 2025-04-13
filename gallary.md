@@ -4,7 +4,7 @@ title: "Photo Gallery"
 permalink: /gallery/
 ---
 
-<h2>Some of my favorite shots</h2>
+<h2>Santa Barbara Beaches at Sunset!</h2>
 
 <div class="gallery">
   <img src="/gallery/1.JPG" alt="Photo 1" width="300"/>
