@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Photo Gallery"
+title: "Yao Qin's Photo Gallery"
 permalink: /gallery/
 ---
 <!-- Lightbox2 CSS -->
