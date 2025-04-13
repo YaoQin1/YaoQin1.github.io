@@ -5,8 +5,8 @@
   <title>Yao Qin's Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Lightbox2 CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+  <!-- ✅ Lightbox2 CSS (working CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
 
   <style>
     body {
@@ -50,13 +50,13 @@
       object-fit: cover;
       display: block;
     }
+
+    /* ✅ Force nav arrows to be visible */
+    .lightbox .lb-nav a.lb-prev,
+    .lightbox .lb-nav a.lb-next {
+      opacity: 1 !important;
+    }
   </style>
-  <style>
-  .lightbox .lb-nav a.lb-prev,
-  .lightbox .lb-nav a.lb-next {
-    opacity: 1 !important;
-  }
-</style>
 </head>
 
 <body>
@@ -85,18 +85,15 @@
       <img src="SB/7.JPG" alt="Santa Barbara 7">
     </a>
   </div>
-  <!-- Lightbox2 JS + CSS (working version from jsDelivr) -->
-<link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
-<script>
-  lightbox.option({
-    'resizeDuration': 200,
-    'wrapAround': true,
-    'alwaysShowNavOnTouchDevices': true
-  });
-</script>
 
-
-
+  <!-- ✅ Lightbox2 JS (working CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
+  <script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true,
+      'alwaysShowNavOnTouchDevices': true
+    });
+  </script>
 </body>
 </html>
