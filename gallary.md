@@ -3,6 +3,13 @@ layout: page
 title: "Photo Gallery"
 permalink: /gallery/
 ---
+<!-- Lightbox2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+
+<!-- Lightbox2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+
+
 <style>
 .gallery-container {
   display: flex;
@@ -30,9 +37,14 @@ permalink: /gallery/
 
 <h2>Santa Barbara Beaches at Sunset!</h2>
 
-<div class="gallery">
-  <img src="/gallery/SB/1.JPG" alt="Photo 1" width="300"/>
-  <img src="/gallery/SB/2.JPG" alt="Photo 2" width="300"/>
-  <img src="/gallery/SB/3.JPG" alt="Photo 3" width="300"/>
-  <img src="/gallery/SB/4.JPG" alt="Photo 4" width="300"/>
+<div class="gallery-container">
+  <a href="/gallary/SB/1.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 1">
+    <img src="/gallary/SB/1.JPG" alt="Photo 1">
+  </a>
+  <a href="/gallary/SB/2.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 2">
+    <img src="/gallary/SB/2.JPG" alt="Photo 2">
+  </a>
+  <a href="/gallary/SB/3.JPG" data-lightbox="sb-gallery" data-title="Santa Barbara Sunset 3">
+    <img src="/gallary/SB/3.JPG" alt="Photo 3">
+  </a>
 </div>
