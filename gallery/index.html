@@ -57,6 +57,10 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
 
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.95);
@@ -123,7 +127,7 @@
 </head>
 
 <body>
-  <h2>Santa Barbara Beaches at Sunset!</h2>
+  <h2 id="santa-barbara">Santa Barbara Beaches at Sunset!</h2>
   <p class="section-date">April 12, 2025</p>
 
   <div class="gallery-container" id="gallery">
@@ -134,7 +138,7 @@
     <img src="SB/5.JPG" alt="Santa Barbara 5" />
   </div>
 
-  <h2 class="section-heading">Amsterdam Windmills - A Peaceful Night</h2>
+  <h2 id="amsterdam" class="section-heading">Amsterdam Windmills – A Peaceful Night</h2>
   <p class="section-date">March 23, 2025</p>
   <div class="gallery-container" id="amsterdam-gallery">
     <img src="Amsterdam/1.JPG" alt="Amsterdam 1" />
