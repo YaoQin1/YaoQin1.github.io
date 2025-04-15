@@ -15,7 +15,7 @@
     body {
       font-family: 'Open Sans', sans-serif;
       padding: 40px;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: auto;
       background: #fff;
     }
@@ -45,6 +45,7 @@
 
     .gallery-container img {
       width: 100%;
+      display: inline-block;
       margin-bottom: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -119,9 +120,130 @@
       border-radius: 0;
       cursor: pointer;
     }
+    .force-right {
+      break-before: column;
+    }
+    .amsterdam-three-cols {
+      column-count: 3;
+    }
+    .grid-3-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-flow: column;
+      grid-auto-rows: auto; /* ✅ This lets columns grow vertically */
+      gap: 20px;
+    }
+
+
+    .grid-3-cols img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin-bottom: 0; /* Override the margin from gallery-container img */
+    }
 
     .close {
       display: none;
+    }
+
+    .amsterdam-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 20px;
+    }
+
+    .first-column {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;  /* Increased from 20px to 40px for more spacing */
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    .amsterdam-layout img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .amsterdam-layout > img:nth-child(4) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .amsterdam-layout > img:nth-child(5) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .amsterdam-layout img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Add this new class for Budapest's first column */
+    .budapest-first-column {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      width: 100%;  /* Larger width compared to the 70% in other sections */
+      margin: 0 auto;
+    }
+
+    .austria-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 20px;
+    }
+
+    .austria-first-column {
+      grid-column: 1;
+      width: 100%;  /* Same width as other sections */
+      margin: 0 auto;
+    }
+
+    .austria-second-column, .austria-third-column {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      width: 100%;  /* Same width as first column images in other sections */
+      margin: 0 auto;
+    }
+
+    .austria-second-column {
+      grid-column: 2;
+    }
+
+    .austria-third-column {
+      grid-column: 3;
+    }
+
+    /* Maintain consistent image styling */
+    .austria-layout img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .austria-layout img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Add specific class for Amsterdam's first column */
+    .amsterdam-first-column {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 90%;  /* Reduced from 70% to 60% for smaller images */
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -131,22 +253,23 @@
   <p class="section-date">April 12, 2025</p>
 
   <div class="gallery-container" id="gallery">
-    <img src="SB/1.JPG" alt="Santa Barbara 1" />
-    <img src="SB/2.JPG" alt="Santa Barbara 2" />
-    <img src="SB/3.JPG" alt="Santa Barbara 3" />
-    <img src="SB/4.JPG" alt="Santa Barbara 4" />
-    <img src="SB/5.JPG" alt="Santa Barbara 5" />
+    <img src="SB/1.JPG" alt="Santa Barbara 1" loading="eager" fetchpriority="high" />
+    <img src="SB/2.JPG" alt="Santa Barbara 2" loading="eager" fetchpriority="high" />
+    <img src="SB/3.JPG" alt="Santa Barbara 3" loading="eager" />
+    <img src="SB/4.JPG" alt="Santa Barbara 4" loading="lazy" />
+    <img src="SB/5.JPG" alt="Santa Barbara 5" loading="lazy" />
   </div>
 
   <h2 id="amsterdam" class="section-heading">Amsterdam Windmills – A Peaceful Night</h2>
   <p class="section-date">March 23, 2025</p>
-  <div class="gallery-container" id="amsterdam-gallery">
-    <img src="Amsterdam/1.JPG" alt="Amsterdam 1" />
-    <img src="Amsterdam/2.JPG" alt="Amsterdam 2" />
-    <img src="Amsterdam/3.JPG" alt="Amsterdam 3" />
-    <img src="Amsterdam/4.JPG" alt="Amsterdam 4" />
-    <img src="Amsterdam/5.JPG" alt="Amsterdam 5" />
-    <img src="Amsterdam/6.JPG" alt="Amsterdam 6" />
+  <div class="amsterdam-layout" id="amsterdam-gallery">
+    <div class="amsterdam-first-column">
+      <img src="Amsterdam/1.JPG" alt="Amsterdam 1" loading="lazy" />
+      <img src="Amsterdam/2.JPG" alt="Amsterdam 2" loading="lazy" />
+      <img src="Amsterdam/3.JPG" alt="Amsterdam 3" loading="lazy" />
+    </div>
+    <img src="Amsterdam/4.JPG" alt="Amsterdam 4" loading="lazy" />
+    <img src="Amsterdam/5.JPG" alt="Amsterdam 5" loading="lazy" />
   </div>
 
   <h2 id="kyoto" class="section-heading">Japan</h2>
@@ -167,14 +290,14 @@
 
   <h2 id="yunnan" class="section-heading">Chinese Yunnan</h2>
   <p class="section-date">November, 2024</p>
-  <div class="gallery-container" id="amsterdam-gallery">
-    <img src="Yunnan/1.JPG" alt="Yunnan 1" />
-    <img src="Yunnan/2.JPG" alt="Yunnan 2" />
-    <img src="Yunnan/3.JPG" alt="Yunnan 3" />
-    <img src="Yunnan/4.JPG" alt="Yunnan 4" /> 
-    <img src="Yunnan/5.JPG" alt="Yunnan 5" />
-    <img src="Yunnan/6.JPG" alt="Yunnan 6" />
-    <img src="Yunnan/7.JPG" alt="Yunnan 7" />
+  <div class="amsterdam-layout" id="yunnan-gallery">
+    <div class="first-column">
+      <img src="Yunnan/1.JPG" alt="Yunnan 1" loading="lazy" />
+      <img src="Yunnan/2.JPG" alt="Yunnan 2" loading="lazy" />
+      <img src="Yunnan/3.JPG" alt="Yunnan 3" loading="lazy" />
+    </div>
+    <img src="Yunnan/4.JPG" alt="Yunnan 4" loading="lazy" />
+    <img src="Yunnan/5.JPG" alt="Yunnan 5" loading="lazy" />
   </div>
 
   <h2 id="madagascar" class="section-heading">Madagascar</h2>
@@ -205,28 +328,32 @@
 </div>
 
 <h2 id="lake" class="section-heading">Austria Lake District</h2>
-  <p class="section-date">July, 2024</p>
-  <div class="gallery-container" id="amsterdam-gallery">
-    <img src="Austria-Lake/1.JPG" alt="Austria-Lake 1" />
-    <img src="Austria-Lake/2.JPG" alt="Austria-Lake 2" />
-    <img src="Austria-Lake/3.JPG" alt="Austria-Lake 3" />
-    <img src="Austria-Lake/4.JPG" alt="Austria-Lake 4" /> 
-    <img src="Austria-Lake/5.JPG" alt="Austria-Lake 5" />
+<p class="section-date">July, 2024</p>
+<div class="austria-layout" id="austria-gallery">
+  <div class="austria-first-column">
+    <img src="Austria-Lake/5.JPG" alt="Austria-Lake 5" loading="lazy" />
   </div>
+  <div class="austria-second-column">
+    <img src="Austria-Lake/2.JPG" alt="Austria-Lake 2" loading="lazy" />
+    <img src="Austria-Lake/3.JPG" alt="Austria-Lake 3" loading="lazy" />
+  </div>
+  <div class="austria-third-column">
+    <img src="Austria-Lake/4.JPG" alt="Austria-Lake 4" loading="lazy" />
+    <img src="Austria-Lake/1.JPG" alt="Austria-Lake 1" loading="lazy" />
+  </div>
+</div>
 
   <h2 id="budapest" class="section-heading">Budapest</h2>
   <p class="section-date">May, 2024</p>
-  <div class="gallery-container" id="amsterdam-gallery">
-    <img src="Budapest/1.JPG" alt="Budapest 1" />
-    <img src="Budapest/2.JPG" alt="Budapest 2" />
-    <img src="Budapest/3.JPG" alt="Budapest 3" />
-    <img src="Budapest/4.JPG" alt="Budapest 4" /> 
-    <img src="Budapest/5.JPG" alt="Budapest 5" />
-    <img src="Budapest/6.JPG" alt="Budapest 6" />
-<!--     <img src="Budapest/7.JPG" alt="Budapest 7" />
-    <img src="Budapest/8.JPG" alt="Budapest 8" /> -->
+  <div class="amsterdam-layout" id="budapest-gallery">
+    <div class="budapest-first-column">
+      <img src="Budapest/1.JPG" alt="Budapest 1" loading="lazy" />
+      <img src="Budapest/2.JPG" alt="Budapest 2" loading="lazy" />
+    </div>
+    <img src="Budapest/3.JPG" alt="Budapest 3" loading="lazy" />
+    <img src="Budapest/4.JPG" alt="Budapest 4" loading="lazy" />
   </div>
-
+  
 
 
   <dialog id="lightbox">
