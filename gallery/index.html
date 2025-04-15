@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <title>Yao Qin's Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preload" as="image" href="SB/1.JPG">
-  <link rel="preload" as="image" href="SB/2.JPG">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="/">
+  <link rel="preconnect" href="/">
+  <link rel="preload" as="image" href="SB/1.JPG" fetchpriority="high">
+  <link rel="preload" as="image" href="SB/2.JPG" fetchpriority="high">
 
   <style>
     * {
@@ -253,6 +256,22 @@
       margin: 0 auto;
       align-self: start;
     }
+
+    .progressive-image-container {
+      position: relative;
+      overflow: hidden;
+      background: #f6f6f6;
+    }
+
+    .full-image {
+      position: relative;
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
+    }
+
+    .full-image.loaded {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -261,11 +280,25 @@
   <p class="section-date">April 12, 2025</p>
 
   <div class="gallery-container" id="gallery">
-    <img src="SB/1.JPG" alt="Santa Barbara 1" loading="eager" fetchpriority="high" decoding="async" />
-    <img src="SB/2.JPG" alt="Santa Barbara 2" loading="eager" fetchpriority="high" decoding="async" />
-    <img src="SB/3.JPG" alt="Santa Barbara 3" loading="eager" decoding="async" />
-    <img src="SB/4.JPG" alt="Santa Barbara 4" loading="lazy" decoding="async" />
-    <img src="SB/5.JPG" alt="Santa Barbara 5" loading="lazy" decoding="async" />
+    <img src="SB/1.JPG" alt="Santa Barbara 1" 
+         loading="eager" 
+         fetchpriority="high" 
+         decoding="async">
+    <img src="SB/2.JPG" alt="Santa Barbara 2" 
+         loading="eager" 
+         fetchpriority="high" 
+         decoding="async">
+    <img src="SB/3.JPG" alt="Santa Barbara 3" 
+         loading="eager" 
+         decoding="async">
+    <img src="SB/4.JPG" alt="Santa Barbara 4" 
+         loading="lazy" 
+         data-src="SB/4.JPG"
+         decoding="async">
+    <img src="SB/5.JPG" alt="Santa Barbara 5" 
+         loading="lazy" 
+         data-src="SB/5.JPG"
+         decoding="async">
   </div>
 
   <h2 id="amsterdam" class="section-heading">Amsterdam Windmills – A Peaceful Night</h2>
@@ -372,24 +405,80 @@
   </dialog>
 
   <script>
-    // Optimize image loading
+    // Progressive loading with priority queue
     document.addEventListener("DOMContentLoaded", function() {
-        // Initialize Intersection Observer for better lazy loading
+        const imageQueue = [];
+        let isLoading = false;
+        const maxConcurrentLoads = 3; // Load 3 images at a time
+        
+        function loadNextImages() {
+            if (imageQueue.length === 0 || isLoading) return;
+            
+            isLoading = true;
+            const currentBatch = imageQueue.splice(0, maxConcurrentLoads);
+            
+            Promise.all(currentBatch.map(img => {
+                return new Promise((resolve) => {
+                    const fullRes = new Image();
+                    fullRes.src = img.getAttribute('data-src');
+                    fullRes.onload = () => {
+                        img.src = fullRes.src;
+                        img.classList.add('loaded');
+                        resolve();
+                    };
+                });
+            })).then(() => {
+                isLoading = false;
+                loadNextImages();
+            });
+        }
+
+        // Intersection Observer for smart loading
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
+                    if (!img.classList.contains('loaded') && !imageQueue.includes(img)) {
+                        imageQueue.push(img);
+                        loadNextImages();
+                    }
                     observer.unobserve(img);
                 }
             });
         }, {
-            rootMargin: "50px 0px",
+            rootMargin: '50px 0px',
             threshold: 0.01
         });
 
-        // Observe all lazy loaded images
+        // Prioritize visible images
         document.querySelectorAll('img[loading="lazy"]').forEach(img => {
             imageObserver.observe(img);
+        });
+
+        // Cache images in memory for faster subsequent access
+        const imageCache = new Map();
+        
+        function preloadImage(src) {
+            if (!imageCache.has(src)) {
+                const img = new Image();
+                img.src = src;
+                imageCache.set(src, img);
+            }
+        }
+
+        // Preload next batch of images when user scrolls
+        let timeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                const visibleImages = Array.from(document.querySelectorAll('img'))
+                    .filter(img => {
+                        const rect = img.getBoundingClientRect();
+                        return rect.top < window.innerHeight + 500;
+                    });
+                
+                visibleImages.forEach(img => preloadImage(img.getAttribute('data-src') || img.src));
+            }, 100);
         });
     });
 
