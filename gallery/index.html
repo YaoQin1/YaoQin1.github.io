@@ -272,6 +272,19 @@
     .full-image.loaded {
       opacity: 1;
     }
+
+    .image-gallery {
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
+    }
+     .image-gallery.loaded {
+      opacity: 1;
+    }
+
+    .image-thumbnail {
+      background-size: cover;
+      background-position: center;
+    }
   </style>
 </head>
 
@@ -280,25 +293,35 @@
   <p class="section-date">April 12, 2025</p>
 
   <div class="gallery-container" id="gallery">
-    <img src="SB/1.JPG" alt="Santa Barbara 1" 
-         loading="eager" 
-         fetchpriority="high" 
-         decoding="async">
-    <img src="SB/2.JPG" alt="Santa Barbara 2" 
-         loading="eager" 
-         fetchpriority="high" 
-         decoding="async">
-    <img src="SB/3.JPG" alt="Santa Barbara 3" 
-         loading="eager" 
-         decoding="async">
-    <img src="SB/4.JPG" alt="Santa Barbara 4" 
-         loading="lazy" 
-         data-src="SB/4.JPG"
-         decoding="async">
-    <img src="SB/5.JPG" alt="Santa Barbara 5" 
-         loading="lazy" 
-         data-src="SB/5.JPG"
-         decoding="async">
+    <div class="image-thumbnail">
+        <img src="SB/1.JPG" alt="Santa Barbara 1" 
+             loading="eager" 
+             fetchpriority="high" 
+             decoding="async">
+    </div>
+    <div class="image-thumbnail">
+        <img src="SB/2.JPG" alt="Santa Barbara 2" 
+             loading="eager" 
+             fetchpriority="high" 
+             decoding="async">
+    </div>
+    <div class="image-thumbnail">
+        <img src="SB/3.JPG" alt="Santa Barbara 3" 
+             loading="eager" 
+             decoding="async">
+    </div>
+    <div class="image-thumbnail">
+        <img src="SB/4.JPG" 
+             alt="Santa Barbara 4" 
+             loading="lazy" 
+             decoding="async">
+    </div>
+    <div class="image-thumbnail">
+        <img src="SB/5.JPG" 
+             alt="Santa Barbara 5" 
+             loading="lazy" 
+             decoding="async">
+    </div>
   </div>
 
   <h2 id="amsterdam" class="section-heading">Amsterdam Windmills – A Peaceful Night</h2>
@@ -405,81 +428,66 @@
   </dialog>
 
   <script>
-    // Progressive loading with priority queue
-    document.addEventListener("DOMContentLoaded", function() {
-        const imageQueue = [];
-        let isLoading = false;
-        const maxConcurrentLoads = 3; // Load 3 images at a time
+    // Add this before your existing script
+    function generateNanoImage(img) {
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 4;  // Nano image size
+            canvas.height = 4;
+            
+            const tempImg = new Image();
+            tempImg.crossOrigin = "Anonymous";
+            tempImg.onload = () => {
+                ctx.drawImage(tempImg, 0, 0, 4, 4);
+                resolve(canvas.toDataURL('image/jpeg', 0.1));
+            };
+            tempImg.src = img.src;
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", async function() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
         
-        function loadNextImages() {
-            if (imageQueue.length === 0 || isLoading) return;
+        // Process images in batches
+        const batchSize = 3;
+        for (let i = 0; i < images.length; i += batchSize) {
+            const batch = Array.from(images).slice(i, i + batchSize);
             
-            isLoading = true;
-            const currentBatch = imageQueue.splice(0, maxConcurrentLoads);
-            
-            Promise.all(currentBatch.map(img => {
+            await Promise.all(batch.map(async (img) => {
+                const nanoSrc = await generateNanoImage(img);
+                const parent = img.parentElement;
+                parent.style.backgroundImage = `url(${nanoSrc})`;
+                parent.classList.add('image-thumbnail');
+                
                 return new Promise((resolve) => {
-                    const fullRes = new Image();
-                    fullRes.src = img.getAttribute('data-src');
-                    fullRes.onload = () => {
-                        img.src = fullRes.src;
+                    const fullImg = new Image();
+                    fullImg.onload = () => {
+                        img.src = fullImg.src;
                         img.classList.add('loaded');
                         resolve();
                     };
+                    fullImg.src = img.dataset.src || img.src;
                 });
-            })).then(() => {
-                isLoading = false;
-                loadNextImages();
-            });
+            }));
         }
+    });
 
-        // Intersection Observer for smart loading
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (!img.classList.contains('loaded') && !imageQueue.includes(img)) {
-                        imageQueue.push(img);
-                        loadNextImages();
-                    }
-                    observer.unobserve(img);
+    // Intersection Observer for smart loading
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const container = entry.target;
+                const img = container.querySelector('img');
+                if (img && !img.classList.contains('loaded')) {
+                    img.src = img.dataset.src;
                 }
-            });
-        }, {
-            rootMargin: '50px 0px',
-            threshold: 0.01
-        });
-
-        // Prioritize visible images
-        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-            imageObserver.observe(img);
-        });
-
-        // Cache images in memory for faster subsequent access
-        const imageCache = new Map();
-        
-        function preloadImage(src) {
-            if (!imageCache.has(src)) {
-                const img = new Image();
-                img.src = src;
-                imageCache.set(src, img);
+                imageObserver.unobserve(container);
             }
-        }
-
-        // Preload next batch of images when user scrolls
-        let timeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                const visibleImages = Array.from(document.querySelectorAll('img'))
-                    .filter(img => {
-                        const rect = img.getBoundingClientRect();
-                        return rect.top < window.innerHeight + 500;
-                    });
-                
-                visibleImages.forEach(img => preloadImage(img.getAttribute('data-src') || img.src));
-            }, 100);
         });
+    }, {
+        rootMargin: '50px 0px',
+        threshold: 0.01
     });
 
     // Your existing lightbox code
