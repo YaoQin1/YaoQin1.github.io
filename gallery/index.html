@@ -288,6 +288,45 @@
       width: 90%;  /* Reduced from 70% to 60% for smaller images */
       margin: 0 auto;
     }
+
+    .close-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .close-button:hover {
+      color: rgba(255, 255, 255, 0.9);
+      transform: scale(1.1);
+    }
+
+    dialog:hover .close-button {
+      opacity: 1;
+    }
+
+    dialog.hide-cursor .close-button {
+      opacity: 0;
+    }
+
+    /* Remove any outline on focus */
+    .close-button:focus {
+      outline: none;
+    }
   </style>
 </head>
 
@@ -569,8 +608,8 @@
 
   <dialog id="lightbox">
     <div class="modal-content">
+      <button class="close-button">×</button>
       <img id="modal-img" src="" alt="preview" />
-      <button class="close">&times;</button>
     </div>
   </dialog>
 
@@ -578,7 +617,9 @@
     const images = Array.from(document.querySelectorAll(".gallery-img-container img"));
     const lightbox = document.getElementById("lightbox");
     const modalImg = document.getElementById("modal-img");
+    const closeButton = document.querySelector(".close-button");
     let currentIndex = 0;
+    let timeout;
     
     // Preload full resolution image
     function preloadImage(url) {
@@ -597,7 +638,6 @@
       const container = img.closest('.gallery-img-container');
       const fullSrc = img.dataset.full;
       
-      // Show loading state
       if (!img.fullResLoaded) {
         try {
           container?.classList.add('loading');
@@ -613,31 +653,25 @@
       
       modalImg.src = fullSrc;
       currentIndex = index;
-      if (!lightbox.open) lightbox.showModal();
+      if (!lightbox.open) {
+        lightbox.showModal();
+        // Show cursor and close button initially
+        lightbox.classList.remove('hide-cursor');
+        startCursorTimeout();
+      }
     }
 
-    // Intersection Observer for lazy loading thumbnails
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.src === img.dataset.full) return; // Skip if already loaded full res
-          
-          // Ensure thumbnail is loaded
-          if (!img.thumbnailLoaded) {
-            img.thumbnailLoaded = true;
-          }
-          
-          observer.unobserve(img);
+    // Function to handle cursor visibility
+    function startCursorTimeout() {
+      clearTimeout(timeout);
+      lightbox.classList.remove('hide-cursor');
+      
+      timeout = setTimeout(() => {
+        if (lightbox.open) {
+          lightbox.classList.add('hide-cursor');
         }
-      });
-    }, {
-      rootMargin: '50px 0px',
-      threshold: 0.1
-    });
-
-    // Observe all images
-    images.forEach(img => imageObserver.observe(img));
+      }, 2000);
+    }
 
     // Event Listeners
     images.forEach((img, index) => {
@@ -648,11 +682,27 @@
       showImage((currentIndex + 1) % images.length);
     });
 
+    // Close button click handler
+    closeButton.addEventListener("click", () => {
+      lightbox.close();
+    });
+
+    // Mouse movement handler
+    lightbox.addEventListener("mousemove", () => {
+      startCursorTimeout();
+    });
+
     document.addEventListener("keydown", (e) => {
       if (!lightbox.open) return;
       if (e.key === "ArrowLeft") showImage(currentIndex - 1);
       if (e.key === "ArrowRight") showImage(currentIndex + 1);
       if (e.key === "Escape") lightbox.close();
+    });
+
+    // Reset cursor state when lightbox closes
+    lightbox.addEventListener("close", () => {
+      clearTimeout(timeout);
+      lightbox.classList.remove('hide-cursor');
     });
   </script>
 </body>
