@@ -173,3 +173,244 @@ a:hover, a:focus, a:active {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.gallery-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.gallery-card-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.gallery-card-content h3 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.gallery-card-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #BD5D38;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.gallery-card-link:hover {
+  background-color: #824027;
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+  }
+}
+
+.gallery-regions {
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.region-group {
+  margin-bottom: 2rem;
+}
+
+.region-title {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  border-bottom: 2px solid #BD5D38;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.region-items {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.gallery-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #2c3e50;
+}
+
+.gallery-link:hover {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(5px);
+  color: #BD5D38;
+  text-decoration: none;
+}
+
+.gallery-name {
+  font-weight: 500;
+}
+
+.world-map-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.world-map {
+  width: 100%;
+  height: auto;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+}
+
+.continent {
+  stroke: #ddd;
+  stroke-width: 0.5;
+}
+
+.marker {
+  fill: #BD5D38;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.marker:hover {
+  fill: #824027;
+  r: 8;
+}
+
+.map-tooltip {
+  position: absolute;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-list {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.gallery-list ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.gallery-list a {
+  color: #2c3e50;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.gallery-list a:hover {
+  color: #BD5D38;
+  background-color: #f8f9fa;
+}
+
+.location-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.location-list li a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  color: #2c3e50;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.location-list li a:hover {
+  background-color: #BD5D38;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.region-group h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+/* Map styles */
+#map {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Leaflet popup customization */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.leaflet-popup-content {
+    margin: 0.5rem;
+    text-align: center;
+    min-width: 120px;
+}
+
+.leaflet-popup-content a:hover {
+    color: #BD5D38 !important;
+}
+
+/* Country highlight styles */
+.country-highlight {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.2;
+    }
+}
