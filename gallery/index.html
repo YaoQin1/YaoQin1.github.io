@@ -4,11 +4,6 @@
   <meta charset="UTF-8" />
   <title>Yao Qin's Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="dns-prefetch" href="/">
-  <link rel="preconnect" href="/">
-  <link rel="preload" as="image" href="SB/1.JPG" fetchpriority="high">
-  <link rel="preload" as="image" href="SB/2.JPG" fetchpriority="high">
 
   <style>
     * {
@@ -48,19 +43,62 @@
       column-gap: 20px;
     }
 
-    .gallery-container img {
-      width: 100%;
+    .gallery-img-container {
+      position: relative;
       display: inline-block;
+      width: 100%;
       margin-bottom: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .gallery-img-container img {
+      width: 100%;
+      display: block;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform 0.2s ease-in-out;
     }
 
-    .gallery-container img:hover {
+    .gallery-img-container:hover img {
       transform: scale(1.03);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-img-container.loading::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 1;
+    }
+
+    .loading-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      z-index: 2;
+      display: none;
+    }
+
+    .gallery-img-container.loading .loading-spinner {
+      display: block;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
     html {
@@ -250,64 +288,6 @@
       width: 90%;  /* Reduced from 70% to 60% for smaller images */
       margin: 0 auto;
     }
-
-    #yunnan-gallery > img {
-      width: 100%;
-      margin: 0 auto;
-      align-self: start;
-    }
-
-    .progressive-image-container {
-      position: relative;
-      overflow: hidden;
-      background: #f6f6f6;
-    }
-
-    .full-image {
-      position: relative;
-      opacity: 0;
-      transition: opacity 0.3s ease-in;
-    }
-
-    .full-image.loaded {
-      opacity: 1;
-    }
-
-    .image-gallery {
-      opacity: 0;
-      transition: opacity 0.3s ease-in;
-    }
-     .image-gallery.loaded {
-      opacity: 1;
-    }
-
-    .image-thumbnail {
-      position: relative;
-      overflow: hidden;
-      background: #f6f6f6;
-    }
-
-    .image-thumbnail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    /* Optimize thumbnail quality for better performance */
-    .thumbnail-quality {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(0px);
-    }
-
-    /* Full quality image for lightbox */
-    .lightbox-image {
-      max-width: 100%;
-      max-height: 100vh;
-      object-fit: contain;
-    }
   </style>
 </head>
 
@@ -316,104 +296,273 @@
   <p class="section-date">April 12, 2025</p>
 
   <div class="gallery-container" id="gallery">
-    <img src="SB/1.JPG" alt="Santa Barbara 1" loading="eager" fetchpriority="high" />
-    <img src="SB/2.JPG" alt="Santa Barbara 2" loading="eager" fetchpriority="high" />
-    <img src="SB/3.JPG" alt="Santa Barbara 3" loading="eager" />
-    <img src="SB/4.JPG" alt="Santa Barbara 4" loading="lazy" />
-    <img src="SB/5.JPG" alt="Santa Barbara 5" loading="lazy" />
+    <div class="gallery-img-container">
+      <img src="thumbnail/SB/1.jpg" data-full="SB/1.JPG" alt="Santa Barbara 1" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/SB/2.jpg" data-full="SB/2.JPG" alt="Santa Barbara 2" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/SB/3.jpg" data-full="SB/3.JPG" alt="Santa Barbara 3" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/SB/4.jpg" data-full="SB/4.JPG" alt="Santa Barbara 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/SB/5.jpg" data-full="SB/5.JPG" alt="Santa Barbara 5" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
   </div>
 
   <h2 id="amsterdam" class="section-heading">Amsterdam Windmills – A Peaceful Night</h2>
   <p class="section-date">March 23, 2025</p>
   <div class="amsterdam-layout" id="amsterdam-gallery">
     <div class="amsterdam-first-column">
-      <img src="Amsterdam/1.JPG" alt="Amsterdam 1" loading="lazy" />
-      <img src="Amsterdam/2.JPG" alt="Amsterdam 2" loading="lazy" />
-      <img src="Amsterdam/3.JPG" alt="Amsterdam 3" loading="lazy" />
+      <div class="gallery-img-container">
+        <img src="thumbnail/Amsterdam/1.jpg" data-full="Amsterdam/1.JPG" alt="Amsterdam 1" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="gallery-img-container">
+        <img src="thumbnail/Amsterdam/2.jpg" data-full="Amsterdam/2.JPG" alt="Amsterdam 2" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="gallery-img-container">
+        <img src="thumbnail/Amsterdam/3.jpg" data-full="Amsterdam/3.JPG" alt="Amsterdam 3" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
     </div>
-    <img src="Amsterdam/4.JPG" alt="Amsterdam 4" loading="lazy" />
-    <img src="Amsterdam/5.JPG" alt="Amsterdam 5" loading="lazy" />
+    <div class="gallery-img-container">
+      <img src="thumbnail/Amsterdam/4.jpg" data-full="Amsterdam/4.JPG" alt="Amsterdam 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Amsterdam/5.jpg" data-full="Amsterdam/5.JPG" alt="Amsterdam 5" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
   </div>
 
   <h2 id="kyoto" class="section-heading">Japan</h2>
   <p class="section-date">December, 2024</p>
   <div class="gallery-container" id="kyoto-gallery">
-    <img src="kyoto/1.JPG" alt="Kyoto 1" loading="lazy" />
-    <img src="kyoto/3.JPG" alt="Kyoto 3" loading="lazy" />
-    <img src="kyoto/2.JPG" alt="Kyoto 2" loading="lazy" />
-    <img src="kyoto/4.JPG" alt="Kyoto 4" loading="lazy" />
-    <img src="kyoto/5.JPG" alt="Kyoto 5" loading="lazy" />
-    <img src="kyoto/6.JPG" alt="Kyoto 6" loading="lazy" />
-    <img src="kyoto/7.JPG" alt="Kyoto 7" loading="lazy" />
-    <img src="kyoto/8.JPG" alt="Kyoto 8" loading="lazy" />
-    <img src="kyoto/9.JPG" alt="Kyoto 9" loading="lazy" />
-    <img src="kyoto/10.JPG" alt="Kyoto 10" loading="lazy" />
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/1.jpg" data-full="kyoto/1.JPG" alt="Kyoto 1" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/3.jpg" data-full="kyoto/3.JPG" alt="Kyoto 3" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/2.jpg" data-full="kyoto/2.JPG" alt="Kyoto 2" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/4.jpg" data-full="kyoto/4.JPG" alt="Kyoto 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/5.jpg" data-full="kyoto/5.JPG" alt="Kyoto 5" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/6.jpg" data-full="kyoto/6.JPG" alt="Kyoto 6" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/7.jpg" data-full="kyoto/7.JPG" alt="Kyoto 7" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/8.jpg" data-full="kyoto/8.JPG" alt="Kyoto 8" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/9.jpg" data-full="kyoto/9.JPG" alt="Kyoto 9" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/kyoto/10.jpg" data-full="kyoto/10.JPG" alt="Kyoto 10" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
   </div>
+
 
   <h2 id="yunnan" class="section-heading">Chinese Yunnan</h2>
   <p class="section-date">November, 2024</p>
   <div class="amsterdam-layout" id="yunnan-gallery">
     <div class="first-column">
-        <img src="Yunnan/1.JPG" alt="Yunnan 1" loading="lazy" />
-        <img src="Yunnan/2.JPG" alt="Yunnan 2" loading="lazy" />
-        <img src="Yunnan/3.JPG" alt="Yunnan 3" loading="lazy" />
+      <div class="gallery-img-container">
+        <img src="thumbnail/Yunnan/1.jpg" data-full="Yunnan/1.JPG" alt="Yunnan 1" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="gallery-img-container">
+        <img src="thumbnail/Yunnan/2.jpg" data-full="Yunnan/2.JPG" alt="Yunnan 2" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="gallery-img-container">
+        <img src="thumbnail/Yunnan/3.jpg" data-full="Yunnan/3.JPG" alt="Yunnan 3" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
     </div>
-    <img src="Yunnan/4.JPG" alt="Yunnan 4" loading="lazy" />
-    <img src="Yunnan/5.JPG" alt="Yunnan 5" loading="lazy" />
+    <div class="gallery-img-container">
+      <img src="thumbnail/Yunnan/4.jpg" data-full="Yunnan/4.JPG" alt="Yunnan 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Yunnan/5.jpg" data-full="Yunnan/5.JPG" alt="Yunnan 5" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
   </div>
 
   <h2 id="madagascar" class="section-heading">Madagascar</h2>
   <p class="section-date">September, 2024</p>
   <div class="gallery-container" id="madagascar-gallery">
-    <img src="Madagascar/1.JPG" alt="Madagascar 1" loading="lazy" />
-    <img src="Madagascar/2.JPG" alt="Madagascar 2" loading="lazy" />
-    <img src="Madagascar/3.JPG" alt="Madagascar 3" loading="lazy" />
-    <img src="Madagascar/4.JPG" alt="Madagascar 4" loading="lazy" />
-    <img src="Madagascar/5.JPG" alt="Madagascar 5" loading="lazy" />
-    <img src="Madagascar/6.JPG" alt="Madagascar 6" loading="lazy" />
-    <img src="Madagascar/7.JPG" alt="Madagascar 7" loading="lazy" />
-    <img src="Madagascar/8.JPG" alt="Madagascar 8" loading="lazy" />
-    <img src="Madagascar/9.JPG" alt="Madagascar 9" loading="lazy" />
-    <img src="Madagascar/10.JPG" alt="Madagascar 10" loading="lazy" />
-    <img src="Madagascar/11.JPG" alt="Madagascar 11" loading="lazy" />
-    <img src="Madagascar/12.JPG" alt="Madagascar 12" loading="lazy" />
-    <img src="Madagascar/13.JPG" alt="Madagascar 13" loading="lazy" />
-    <img src="Madagascar/14.JPG" alt="Madagascar 14" loading="lazy" />
-    <img src="Madagascar/15.JPG" alt="Madagascar 15" loading="lazy" />
-    <img src="Madagascar/16.JPG" alt="Madagascar 16" loading="lazy" />
-    <img src="Madagascar/17.JPG" alt="Madagascar 17" loading="lazy" />
-    <img src="Madagascar/18.JPG" alt="Madagascar 18" loading="lazy" />
-    <img src="Madagascar/19.JPG" alt="Madagascar 19" loading="lazy" />
-    <img src="Madagascar/20.JPG" alt="Madagascar 20" loading="lazy" />
-    <img src="Madagascar/21.JPG" alt="Madagascar 21" loading="lazy" />
-    <img src="Madagascar/22.JPG" alt="Madagascar 22" loading="lazy" />
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/1.jpg" data-full="Madagascar/1.JPG" alt="Madagascar 1" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/2.jpg" data-full="Madagascar/2.JPG" alt="Madagascar 2" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/3.jpg" data-full="Madagascar/3.JPG" alt="Madagascar 3" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/4.jpg" data-full="Madagascar/4.JPG" alt="Madagascar 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/5.jpg" data-full="Madagascar/5.JPG" alt="Madagascar 5" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/6.jpg" data-full="Madagascar/6.JPG" alt="Madagascar 6" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/7.jpg" data-full="Madagascar/7.JPG" alt="Madagascar 7" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/8.jpg" data-full="Madagascar/8.JPG" alt="Madagascar 8" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/9.jpg" data-full="Madagascar/9.JPG" alt="Madagascar 9" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/10.jpg" data-full="Madagascar/10.JPG" alt="Madagascar 10" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/11.jpg" data-full="Madagascar/11.JPG" alt="Madagascar 11" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/12.jpg" data-full="Madagascar/12.JPG" alt="Madagascar 12" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/13.jpg" data-full="Madagascar/13.JPG" alt="Madagascar 13" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/14.jpg" data-full="Madagascar/14.JPG" alt="Madagascar 14" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/15.jpg" data-full="Madagascar/15.JPG" alt="Madagascar 15" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/16.jpg" data-full="Madagascar/16.JPG" alt="Madagascar 16" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/17.jpg" data-full="Madagascar/17.JPG" alt="Madagascar 17" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/18.jpg" data-full="Madagascar/18.JPG" alt="Madagascar 18" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/19.jpg" data-full="Madagascar/19.JPG" alt="Madagascar 19" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/20.jpg" data-full="Madagascar/20.JPG" alt="Madagascar 20" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/21.jpg" data-full="Madagascar/21.JPG" alt="Madagascar 21" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Madagascar/22.jpg" data-full="Madagascar/22.JPG" alt="Madagascar 22" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
   </div>
 
-  <h2 id="lake" class="section-heading">Austria Lake District</h2>
-  <p class="section-date">July, 2024</p>
-  <div class="austria-layout" id="austria-gallery">
-    <div class="austria-first-column">
-        <img src="Austria-Lake/5.JPG" alt="Austria-Lake 5" loading="lazy" />
-    </div>
-    <div class="austria-second-column">
-        <img src="Austria-Lake/1.JPG" alt="Austria-Lake 1" loading="lazy" />
-        <img src="Austria-Lake/3.JPG" alt="Austria-Lake 3" loading="lazy" />
-    </div>
-    <div class="austria-third-column">
-        <img src="Austria-Lake/2.JPG" alt="Austria-Lake 2" loading="lazy" />
-        <img src="Austria-Lake/4.JPG" alt="Austria-Lake 4" loading="lazy" />
+<h2 id="lake" class="section-heading">Austria Lake District</h2>
+<p class="section-date">July, 2024</p>
+<div class="austria-layout" id="austria-gallery">
+  <div class="austria-first-column">
+    <div class="gallery-img-container">
+      <img src="thumbnail/Austria-Lake/5.jpg" data-full="Austria-Lake/5.JPG" alt="Austria-Lake 5" loading="lazy" />
+      <div class="loading-spinner"></div>
     </div>
   </div>
+  <div class="austria-second-column">
+    <div class="gallery-img-container">
+      <img src="thumbnail/Austria-Lake/1.jpg" data-full="Austria-Lake/1.JPG" alt="Austria-Lake 1" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Austria-Lake/3.jpg" data-full="Austria-Lake/3.JPG" alt="Austria-Lake 3" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+  <div class="austria-third-column">
+    <div class="gallery-img-container">
+      <img src="thumbnail/Austria-Lake/2.jpg" data-full="Austria-Lake/2.JPG" alt="Austria-Lake 2" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Austria-Lake/4.jpg" data-full="Austria-Lake/4.JPG" alt="Austria-Lake 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+</div>
 
   <h2 id="budapest" class="section-heading">Budapest</h2>
   <p class="section-date">May, 2024</p>
   <div class="amsterdam-layout" id="budapest-gallery">
     <div class="budapest-first-column">
-      <img src="Budapest/1.JPG" alt="Budapest 1" loading="lazy" />
-      <img src="Budapest/2.JPG" alt="Budapest 2" loading="lazy" />
+      <div class="gallery-img-container">
+        <img src="thumbnail/Budapest/1.jpg" data-full="Budapest/1.JPG" alt="Budapest 1" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="gallery-img-container">
+        <img src="thumbnail/Budapest/2.jpg" data-full="Budapest/2.JPG" alt="Budapest 2" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
     </div>
-    <img src="Budapest/3.JPG" alt="Budapest 3" loading="lazy" />
-    <img src="Budapest/4.JPG" alt="Budapest 4" loading="lazy" />
+    <div class="gallery-img-container">
+      <img src="thumbnail/Budapest/3.jpg" data-full="Budapest/3.JPG" alt="Budapest 3" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Budapest/4.jpg" data-full="Budapest/4.JPG" alt="Budapest 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
   </div>
   
 
@@ -426,71 +575,84 @@
   </dialog>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const images = document.querySelectorAll('img');
-        const lightbox = document.getElementById("lightbox");
-        const modalImg = document.getElementById("modal-img");
-        let currentIndex = 0;
+    const images = Array.from(document.querySelectorAll(".gallery-img-container img"));
+    const lightbox = document.getElementById("lightbox");
+    const modalImg = document.getElementById("modal-img");
+    let currentIndex = 0;
+    
+    // Preload full resolution image
+    function preloadImage(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+      });
+    }
 
-        // Store high-resolution sources
-        const highResImages = new Map();
-        images.forEach(img => {
-            highResImages.set(img, img.src);
-        });
-
-        function showImage(index) {
-            if (index < 0 || index >= images.length) return;
-            const img = images[index];
-            
-            // Use high-resolution source for lightbox
-            modalImg.src = highResImages.get(img);
-            modalImg.classList.add('lightbox-image');
-            currentIndex = index;
-            
-            if (!lightbox.open) {
-                lightbox.showModal();
-            }
+    async function showImage(index) {
+      if (index < 0 || index >= images.length) return;
+      
+      const img = images[index];
+      const container = img.closest('.gallery-img-container');
+      const fullSrc = img.dataset.full;
+      
+      // Show loading state
+      if (!img.fullResLoaded) {
+        try {
+          container?.classList.add('loading');
+          await preloadImage(fullSrc);
+          img.src = fullSrc;
+          img.fullResLoaded = true;
+        } catch (error) {
+          console.error('Error loading full resolution image:', error);
+        } finally {
+          container?.classList.remove('loading');
         }
+      }
+      
+      modalImg.src = fullSrc;
+      currentIndex = index;
+      if (!lightbox.open) lightbox.showModal();
+    }
 
-        // Add click handlers to all images
-        images.forEach((img, index) => {
-            img.addEventListener("click", () => {
-                showImage(index);
-            });
-        });
+    // Intersection Observer for lazy loading thumbnails
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.src === img.dataset.full) return; // Skip if already loaded full res
+          
+          // Ensure thumbnail is loaded
+          if (!img.thumbnailLoaded) {
+            img.thumbnailLoaded = true;
+          }
+          
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px 0px',
+      threshold: 0.1
+    });
 
-        // Lightbox navigation
-        modalImg.addEventListener("click", () => {
-            showImage((currentIndex + 1) % images.length);
-        });
+    // Observe all images
+    images.forEach(img => imageObserver.observe(img));
 
-        document.addEventListener("keydown", (e) => {
-            if (!lightbox.open) return;
-            if (e.key === "ArrowLeft") showImage(currentIndex - 1);
-            if (e.key === "ArrowRight") showImage(currentIndex + 1);
-            if (e.key === "Escape") lightbox.close();
-        });
+    // Event Listeners
+    images.forEach((img, index) => {
+      img.addEventListener("click", () => showImage(index));
+    });
 
-        // Intersection Observer for lazy loading
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (!img.classList.contains('loaded')) {
-                        img.classList.add('loaded');
-                    }
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '50px 0px',
-            threshold: 0.01
-        });
+    modalImg.addEventListener("click", () => {
+      showImage((currentIndex + 1) % images.length);
+    });
 
-        // Observe all images except the first three
-        Array.from(images).slice(3).forEach(img => {
-            imageObserver.observe(img);
-        });
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.open) return;
+      if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+      if (e.key === "ArrowRight") showImage(currentIndex + 1);
+      if (e.key === "Escape") lightbox.close();
     });
   </script>
 </body>
