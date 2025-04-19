@@ -596,6 +596,23 @@
       clearTimeout(timeout);
       lightbox.classList.remove('hide-cursor');
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if there's a hash in the URL
+        if (window.location.hash) {
+            // Get the element
+            const element = document.querySelector(window.location.hash);
+            if (element) {
+                // Wait a bit for images to start loading
+                setTimeout(() => {
+                    element.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 100);
+            }
+        }
+    });
   </script>
 </body>
 </html>
