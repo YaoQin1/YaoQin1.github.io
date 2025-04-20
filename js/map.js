@@ -89,6 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: "Amsterdam", coords: [52.3676, 4.9041], link: "#amsterdam", country: "Netherlands" },
         { name: "Budapest", coords: [47.4979, 19.0402], link: "#budapest", country: "Hungary" },
         { name: "Austria Lake District", coords: [47.8095, 13.0550], link: "#lake", country: "Austria" },
+        { name: "Istanbul", coords: [41.0082, 28.9784], link: "#istanbul", country: "Turkey" },
+        { name: "Cappadocia", coords: [38.6431, 34.8270], link: "#cappadocia", country: "Turkey" },
         { name: "Japan", coords: [35.0116, 135.7681], link: "#kyoto", country: "Japan" },
         { name: "Chinese Yunnan", coords: [25.0389, 102.7183], link: "#yunnan", country: "China" },
         { name: "Madagascar", coords: [-18.7669, 46.8691], link: "#madagascar", country: "Madagascar" },
