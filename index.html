@@ -1115,7 +1115,47 @@ Jan. 2024: Turkey - Paris -->
             { name: "Japan", coords: [35.0116, 135.7681], link: "#kyoto", country: "Japan" },
             { name: "Chinese Yunnan", coords: [25.0389, 102.7183], link: "#yunnan", country: "China" },
             { name: "Madagascar", coords: [-18.7669, 46.8691], link: "#madagascar", country: "Madagascar" },
-            { name: "Santa Barbara", coords: [34.4208, -119.6982], link: "#santa-barbara", country: "United States" }
+            { name: "Santa Barbara", coords: [34.4208, -119.6982], link: "#santa-barbara", country: "United States" },
+            // UK locations
+            { name: "London", coords: [51.5074, -0.1278], link: null, country: "United Kingdom" },
+            { name: "Cambridge", coords: [52.2053, 0.1218], link: null, country: "United Kingdom" },
+            { name: "Oxford", coords: [51.7520, -1.2577], link: null, country: "United Kingdom" },
+            { name: "Edinburgh", coords: [55.9533, -3.1883], link: null, country: "United Kingdom" },
+            // Israel locations
+            { name: "Tel Aviv", coords: [32.0853, 34.7818], link: null, country: "Israel" },
+            { name: "Jerusalem", coords: [31.7683, 35.2137], link: null, country: "Israel" },
+            // Palestine
+            { name: "Palestine", coords: [31.9522, 35.2332], link: null, country: "Palestine" },
+            // UAE location
+            { name: "Abu Dhabi", coords: [24.4539, 54.3773], link: null, country: "United Arab Emirates" },
+            // Italy locations
+            { name: "Florence", coords: [43.7696, 11.2558], link: null, country: "Italy" },
+            { name: "Rome", coords: [41.9028, 12.4964], link: null, country: "Italy" },
+            // Switzerland
+            { name: "Zurich", coords: [47.3769, 8.5417], link: null, country: "Switzerland" },
+            // Vatican City
+            { name: "Vatican City", coords: [41.9029, 12.4534], link: null, country: "Vatican City" },
+            // Spain
+            { name: "Barcelona", coords: [41.3851, 2.1734], link: null, country: "Spain" },
+            // France
+            { name: "Paris", coords: [48.8566, 2.3522], link: null, country: "France" },
+            // Austria locations
+            { name: "Vienna", coords: [48.2082, 16.3738], link: null, country: "Austria" },
+            // Netherlands
+            { name: "The Hague", coords: [52.0705, 4.3007], link: null, country: "Netherlands" },
+            // Poland
+            { name: "Krakow", coords: [50.0647, 19.9450], link: null, country: "Poland" },
+            // Czech Republic
+            { name: "Prague", coords: [50.0755, 14.4378], link: null, country: "Czech Republic" },
+            // Canadian locations
+            { name: "Vancouver", coords: [49.2827, -123.1207], link: null, country: "Canada" },
+            { name: "Toronto", coords: [43.6532, -79.3832], link: null, country: "Canada" },
+            // Guatemala
+            { name: "Guatemala", coords: [15.7835, -90.2308], link: null, country: "Guatemala" }, // Center of Guatemala
+            // Mexico
+            { name: "Mexico", coords: [23.6345, -102.5528], link: null, country: "Mexico" }, // Center of Mexico
+            // Australia
+            { name: "Melbourne", coords: [-37.8136, 144.9631], link: null, country: "Australia" }
         ];
 
         // Custom icon for markers
@@ -1137,17 +1177,37 @@ Jan. 2024: Turkey - Paris -->
         locations.forEach(location => {
             const marker = L.marker(location.coords, { icon: customIcon })
                 .addTo(map)
-                .bindPopup(`<a href="gallery/index.html${location.link}" style="
-                    color: #ff9900;
-                    text-decoration: none;
-                    font-weight: 500;
-                    padding: 4px 8px;
-                    display: block;
-                    font-size: 1.2em;
-                ">${location.name}</a>`);
+                .bindPopup(
+                    location.link 
+                        ? `<a href="gallery/index.html${location.link}" style="
+                            color: #ff9900;
+                            text-decoration: none;
+                            font-weight: 500;
+                            padding: 4px 8px;
+                            display: block;
+                            font-size: 1.2em;
+                        ">${location.name}</a>`
+                        : `<span style="
+                            color: #2c3e50;
+                            font-weight: 500;
+                            padding: 4px 8px;
+                            display: block;
+                            font-size: 1.2em;
+                        ">${location.name}</span>`
+                );
             
             marker.on('mouseover', function() {
                 this.openPopup();
+                if (typeof highlightCountry === 'function') {
+                    highlightCountry(location.country);
+                }
+            });
+
+            marker.on('mouseout', function() {
+                this.closePopup();
+                if (typeof removeHighlight === 'function') {
+                    removeHighlight();
+                }
             });
         });
     });
