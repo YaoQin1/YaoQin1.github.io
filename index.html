@@ -123,13 +123,15 @@ li {
     gap: 2rem;
     justify-content: flex-start;
     margin-top: 1rem;
+    width: 100%;
 }
 
 /* Individual continent group */
 .continent-group {
     min-width: 200px;
     flex: 0 1 auto;
-    margin-bottom: 12px;  /* Reduced from 15px */
+    margin-bottom: 12px;
+    text-align: left;
 }
 
 /* Continent headings with dot accent */
@@ -921,15 +923,20 @@ href="code-CA15.zip">Code</a>][<a href="CVPR_CA_Chinese.pdf">&#20013;&#25991;&#2
     <h2 style="font-size:200%; font-family:Open Sans;">
         <a href="gallery/index.html" style="color: #343a40; text-decoration: none;">Photo Gallery</a>
     </h2>
-    
+    <br>
+
+    <p>
+        I love traveling and feel so lucky to have visited these beautiful places over the past years—from breathtaking natural landscapes to historic sites rich with memories.
+    </p>
+
     <!-- Add map container -->
     <div style="display: flex; justify-content: flex-start; width: 100%;">
-        <div id="map" style="height: 400px; width: 700px; margin: 20px; border-radius: 8px;"></div>
+        <div id="map" style="height: 400px; width: 800px; margin: 20px 0; border-radius: 8px;"></div>
     </div>
 
     <!-- Add the list view below the map -->
     <div class="gallery-list" style="margin-top: 20px;">
-        <div class="continents-container">
+        <div class="continents-container" style="justify-content: flex-start;">
             <div class="continent-group">
                 <b class="continent-name">North America</b>
                 <ul class="location-list">
