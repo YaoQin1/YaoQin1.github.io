@@ -152,7 +152,7 @@
     .austria-second-column { grid-column: 2; }
     .austria-third-column { grid-column: 3; }
 
-    .budapest-first-column {
+    /*.budapest-first-column {
       grid-column: 1;
       display: flex;
       flex-direction: column;
@@ -160,7 +160,7 @@
       width: 100%;
       margin: 0 auto;
     }
-
+*/
     .cappadocia-gallery-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
@@ -246,11 +246,6 @@
       filter: grayscale(100%) brightness(115%) contrast(85%);
     }
 
-    #guilin-gallery .gallery-img-container:first-child,
-    #guilin-gallery .gallery-img-container:nth-child(2),
-    #guilin-gallery .gallery-img-container:nth-child(5) {
-      margin-bottom: 43px; /* Increased gap after first and second images */
-    }
 
     #istanbul-gallery .gallery-img-container:nth-child(3),
     #istanbul-gallery .gallery-img-container:nth-child(10) {
@@ -274,8 +269,38 @@
 
     #madagascar-gallery .gallery-img-container:nth-child(13),
     #madagascar-gallery .gallery-img-container:nth-child(14) {
-      margin-bottom: 43px;  /* Increased gap after 16th image in Madagascar section 
+      margin-bottom: 43px;  
     }
+
+    #auschwitz-gallery .gallery-img-container:nth-child(7),
+    #auschwitz-gallery .gallery-img-container:nth-child(8),
+    #auschwitz-gallery .gallery-img-container:nth-child(9) {
+      margin-bottom: 36px;  
+    }
+
+    #guilin-gallery .gallery-img-container:nth-child(0),
+    #guilin-gallery .gallery-img-container:nth-child(1) {
+      margin-bottom: 40px;  
+    }
+
+    /*#kyoto-gallery .gallery-img-container:nth-child(1),
+    #kyoto-gallery .gallery-img-container:nth-child(6),
+    #kyoto-gallery .gallery-img-container:nth-child(5),
+    #kyoto-gallery .gallery-img-container:nth-child(4) {
+      margin-bottom: 43px;  
+    }*/
+    /*#kyoto-gallery .gallery-img-container:nth-child(1),
+    #kyoto-gallery .gallery-img-container:nth-child(6),
+    #kyoto-gallery .gallery-img-container:nth-child(5),*/
+    #kyoto-gallery .gallery-img-container:nth-child(8) {
+      margin-bottom: 10px;  
+    }
+    #kyoto-gallery .gallery-img-container:nth-child(9) {
+      margin-bottom: 10px;  
+    }
+
+
+
 
     
   </style>
@@ -307,7 +332,7 @@
       margin-right: auto;
       line-height: 1.5;
       white-space: nowrap;">
-      I love traveling the world — may these scenes share a glimpse of the joy I've found along the way.
+      I love traveling the world — may these scenes inspire you to set off on your own journey!
     </p>
   </div>
 
@@ -336,6 +361,53 @@
       <div class="loading-spinner"></div>
     </div>
   </div>
+
+
+  <h2 id="auschwitz-birkenau" class="section-heading">Auschwitz-Birkenau, Poland</h2>
+  <p class="section-date">March 25, 2025</p>
+  <div class="gallery-container" id="auschwitz-gallery">
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/1.jpg" data-full="Auschwitz/1.JPG" alt="Auschwitz 1" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/2.jpg" data-full="Auschwitz/2.JPG" alt="Auschwitz 2" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/3.jpg" data-full="Auschwitz/3.JPG" alt="Auschwitz 3" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/4.jpg" data-full="Auschwitz/4.JPG" alt="Auschwitz 4" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/5.jpg" data-full="Auschwitz/5.JPG" alt="Auschwitz 5" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/6.jpg" data-full="Auschwitz/6.JPG" alt="Auschwitz 6" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/7.jpg" data-full="Auschwitz/7.JPG" alt="Auschwitz 7" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/8.jpg" data-full="Auschwitz/8.JPG" alt="Auschwitz 8" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/9.jpg" data-full="Auschwitz/9.JPG" alt="Auschwitz 9" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Auschwitz/10.jpg" data-full="Auschwitz/10.JPG" alt="Auschwitz 10" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+
 
   <h2 id="amsterdam" class="section-heading">Amsterdam</h2>
   <p class="section-date">March 23, 2025</p>
@@ -682,7 +754,7 @@
   </div>
   
 
-  <h2 id="guilin" class="section-heading">Guilin, China</h2>
+  <!-- <h2 id="guilin" class="section-heading">Guilin, China</h2>
   <p class="section-date">September, 2023</p>
   <div class="gallery-container" id="guilin-gallery">
     <div class="gallery-img-container">
@@ -694,54 +766,38 @@
       <div class="loading-spinner"></div>
     </div>
     <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/3.jpg" data-full="Guilin/3.JPG" alt="Guilin 3" loading="lazy" />
+      <img src="thumbnail/Guilin/3.jpg" data-full="Guilin/3.JPG" alt="Guilin 4" loading="lazy" />
       <div class="loading-spinner"></div>
     </div>
     <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/4.jpg" data-full="Guilin/4.JPG" alt="Guilin 4" loading="lazy" />
+      <img src="thumbnail/Guilin/4.jpg" data-full="Guilin/3.JPG" alt="Guilin 7" loading="lazy" />
+      <div class="loading-spinner"></div>
+    </div>
+  </div> -->
+
+  <h2 id="guilin" class="section-heading">Guilin, China</h2>
+  <p class="section-date">September, 2023</p>
+  <div class="amsterdam-layout" id="guilin-gallery">
+    <div class="first-column">
+      <div class="gallery-img-container">
+        <img src="thumbnail/Guilin/1.jpg" data-full="Guilin/1.JPG" alt="Guilin 1" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="gallery-img-container">
+        <img src="thumbnail/Guilin/2.jpg" data-full="Guilin/2.JPG" alt="Guilin 2" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+    <div class="gallery-img-container">
+      <img src="thumbnail/Guilin/4.jpg" data-full="Guilin/4.JPG" alt="Guilin 3" loading="lazy" />
       <div class="loading-spinner"></div>
     </div>
     <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/5.jpg" data-full="Guilin/5.JPG" alt="Guilin 5" loading="lazy" />
+      <img src="thumbnail/Guilin/7.jpg" data-full="Guilin/7.JPG" alt="Guilin 4" loading="lazy" />
       <div class="loading-spinner"></div>
     </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/6.jpg" data-full="Guilin/6.JPG" alt="Guilin 6" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/7.jpg" data-full="Guilin/7.JPG" alt="Guilin 7" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/8.jpg" data-full="Guilin/8.JPG" alt="Guilin 8" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div>
-    <!-- <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/9.jpg" data-full="Guilin/9.JPG" alt="Guilin 9" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div> -->
-    <!-- div class="gallery-img-container">
-      <img src="thumbnail/Guilin/10.jpg" data-full="Guilin/10.JPG" alt="Guilin 10" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/11.jpg" data-full="Guilin/11.JPG" alt="Guilin 11" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/12.jpg" data-full="Guilin/12.JPG" alt="Guilin 12" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/13.jpg" data-full="Guilin/13.JPG" alt="Guilin 31" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div> -->
-    <!-- <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/14.jpg" data-full="Guilin/14.JPG" alt="Guilin 14" loading="lazy" />
-      <div class="loading-spinner"></div>
-    </div>    -->
   </div>
+
 
   <h2 id="guatemala" class="section-heading">Guatemala</h2>
   <p class="section-date">June, 2023</p>
@@ -948,4 +1004,4 @@
 
 
 </body>
-</html>
+</html> 
