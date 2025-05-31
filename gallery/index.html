@@ -149,8 +149,32 @@
       margin: 0 auto;
     }
 
+    .guilin-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 20px;
+    }
+
     .austria-second-column { grid-column: 2; }
     .austria-third-column { grid-column: 3; }
+
+    .guilin-second-column, .guilin-third-column {  
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .guilin-first-column {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .guilin-second-column { grid-column: 2; }
+    .guilin-third-column { grid-column: 3; }
+
 
     /*.budapest-first-column {
       grid-column: 1;
@@ -279,10 +303,10 @@
       margin-bottom: 36px;  
     }
 
-    #guilin-gallery .gallery-img-container:nth-child(0),
+    /*#guilin-gallery .gallery-img-container:nth-child(0),
     #guilin-gallery .gallery-img-container:nth-child(1) {
       margin-bottom: 40px;  
-    }
+    }*/
 
     /*#kyoto-gallery .gallery-img-container:nth-child(1),
     #kyoto-gallery .gallery-img-container:nth-child(6),
@@ -805,8 +829,8 @@
 
   <h2 id="guilin" class="section-heading">Guilin, China</h2>
   <p class="section-date">September, 2023</p>
-  <div class="amsterdam-layout" id="guilin-gallery">
-    <div class="first-column">
+  <div class="guilin-layout" id="guilin-gallery">
+    <div class="guilin-first-column">
       <div class="gallery-img-container">
         <img src="thumbnail/Guilin/1.jpg" data-full="Guilin/1.JPG" alt="Guilin 1" loading="lazy" />
         <div class="loading-spinner"></div>
@@ -816,13 +840,17 @@
         <div class="loading-spinner"></div>
       </div>
     </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/4.jpg" data-full="Guilin/4.JPG" alt="Guilin 3" loading="lazy" />
-      <div class="loading-spinner"></div>
+    <div class="guilin-second-column">
+      <div class="gallery-img-container">
+        <img src="thumbnail/Guilin/4.jpg" data-full="Guilin/4.JPG" alt="Guilin 3" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
     </div>
-    <div class="gallery-img-container">
-      <img src="thumbnail/Guilin/7.jpg" data-full="Guilin/7.JPG" alt="Guilin 4" loading="lazy" />
-      <div class="loading-spinner"></div>
+    <div class="guilin-third-column">
+      <div class="gallery-img-container">
+        <img src="thumbnail/Guilin/7.jpg" data-full="Guilin/7.JPG" alt="Guilin 4" loading="lazy" />
+        <div class="loading-spinner"></div>
+      </div>
     </div>
   </div>
 
