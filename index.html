@@ -803,7 +803,7 @@ Fundamentals and Applications.</li>
   <br>      
 
 <br><a href="https://saketirl.github.io/">Saket Tiwari</a> (Postdoc)         
-<br> Working on Large Language Model & AI for Diabetes
+<br> Working on RL Post-training & World Model for Healthcare
 <br>
  <br><a href="https://mehak126.github.io/">Mehak Dhaliwal</a> (PhD)         
 <br> Working on Large Language Model & AI for Diabetes
@@ -813,9 +813,23 @@ Fundamentals and Applications.</li>
 <br>
 <br><a href="https://kenantang.github.io/">Kenan Tang</a> (PhD)
 <br> Working on AI for Diabetes & Multimodal Model
+
 <br>
-<br><a href="https://youngseok-yoon.github.io/">Nour Abdelmoneim</a> (PhD, co-advised with Prof. Wenbo Guo)
-<br> Working on LLM Reinforcement Learning Post-training
+<br><a href="https://scholar.google.com/citations?user=z0ThZjkAAAAJ&hl=en/">Nour Abdelmoneim</a> (PhD, co-advised with Prof. Wenbo Guo)
+<br> Working on LLM RL Post-training & AI for Diabetes
+
+<br>
+<br><a href="https://qiancx.com/">Chengxuan Qian</a> (PhD)
+<br> Working on World Model for Healthcare
+
+<br>
+<br><a href="https://github.com/Haonan-Ge/">Haonan Ge</a> (PhD)
+<br> Working on World Model for Healthcare
+
+<br>
+<br><a href="https://naveenmn.github.io//">Naveen Mysore</a> (Software Engineer)
+<br> Working on NutriBench App Development
+
 
 
 
@@ -1254,6 +1268,7 @@ Jan. 2024: Turkey - Paris -->
             { name: "Japan", coords: [35.0116, 135.7681], link: "#kyoto", country: "Japan" },
             { name: "Yunnan", coords: [25.0389, 102.7183], link: "#yunnan", country: "China" },
             { name: "Guilin", coords: [25.2637, 110.2900], link: "#guilin", country: "China" },
+            { name: "Shaoxing", coords: [30.0023, 120.5810], link: null, country: "China" },
             { name: "Madagascar", coords: [-18.7669, 46.8691], link: "#madagascar", country: "Madagascar" },
             { name: "Santa Barbara", coords: [34.4208, -119.6982], link: "#santa-barbara", country: "United States" },
             { name: "Palermo", coords: [38.1157, 13.3615], link: "#sicily", country: "Italy" },
@@ -1288,7 +1303,7 @@ Jan. 2024: Turkey - Paris -->
             { name: "Tel Aviv", coords: [32.0853, 34.7818], link: null, country: "Israel" },
             { name: "Jerusalem", coords: [31.7683, 35.2137], link: null, country: "Israel" },
             // Palestine
-            { name: "Palestine", coords: [31.9522, 35.2332], link: null, country: "Palestine" },
+            { name: "Bethlehem", coords: [31.9522, 35.2332], link: null, country: "Palestine" },
             // UAE location
             { name: "Abu Dhabi", coords: [24.4539, 54.3773], link: null, country: "United Arab Emirates" },
             // Italy locations
@@ -1316,7 +1331,7 @@ Jan. 2024: Turkey - Paris -->
             { name: "Toronto", coords: [43.6532, -79.3832], link: null, country: "Canada" },
             { name: "Niagara Falls", coords: [43.0962, -79.0377], link: null, country: "Canada" },
             // Mexico
-            { name: "Mexico", coords: [23.6345, -102.5528], link: null, country: "Mexico" }, // Center of Mexico
+            { name: "Mexico", coords: [23.6345, -102.5528], link: null, country: "China" }, 
             // Australia
             { name: "Melbourne", coords: [-37.8136, 144.9631], link: null, country: "Australia" },
             { name: "The Great Ocean Road", coords: [-38.6880, 143.3910], link: null, country: "Australia" },
@@ -1327,9 +1342,9 @@ Jan. 2024: Turkey - Paris -->
             { name: "Beijing", coords: [39.9042, 116.4074], link: null, country: "China" },
             { name: "Xi'an", coords: [34.3416, 108.9398], link: null, country: "China" },
             { name: "Dalian", coords: [38.9140, 121.6147], link: null, country: "China" },
-            { name: "Harbin", coords: [45.8038, 126.5340], link: null, country: "China" }, // Corrected spelling from Haierbin
+            { name: "Harbin", coords: [45.8038, 126.5340], link: null, country: "China" }, 
             { name: "Hangzhou", coords: [30.2742, 120.1551], link: null, country: "China" },
-            { name: "Hong Kong", coords: [22.3193, 114.1694], link: null, country: "Hong Kong" }, // Special Administrative Region
+            { name: "Hong Kong", coords: [22.3193, 114.1694], link: null, country: "China" }, 
             { name: "Changbaishan", coords: [42.0329, 127.5058], link: null, country: "China" },
             { name: "Chengdu", coords: [30.5728, 104.0668], link: null, country: "China" },
             { name: "Jiuzhaigou", coords: [33.2600, 103.9165], link: null, country: "China" },
@@ -1338,6 +1353,8 @@ Jan. 2024: Turkey - Paris -->
             { name: "Kyoto", coords: [35.0116, 135.7681], link: null, country: "Japan" },
             { name: "Tokyo", coords: [35.6762, 139.6503], link: null, country: "Japan" },
             { name: "Hiroshima", coords: [34.3853, 132.4553], link: null, country: "Japan" },
+            // South Korea
+            { name: "Seoul", coords: [37.5665, 126.9780], link: null, country: "South Korea" },
             
 
             //USA
@@ -1363,8 +1380,8 @@ Jan. 2024: Turkey - Paris -->
             { name: "Solvang", coords: [34.5958, -120.1376], link: null, country: "United States" },
             { name: "Chicago", coords: [41.8781, -87.6298], link: null, country: "United States" },
             { name: "New Jersey", coords: [40.0583, -74.4057], link: null, country: "United States" },
-            { name: "Salt Lake City", coords: [40.7608, -111.8910], link: null, country: "USA" },
-            { name: "Denver", coords: [39.7392, -104.9903], link: null, country: "USA" },
+            { name: "Salt Lake City", coords: [40.7608, -111.8910], link: null, country: "United States" },
+            { name: "Denver", coords: [39.7392, -104.9903], link: null, country: "United States" },
 
             // South America
             { name: "Rio de Janeiro", coords: [-22.9068, -43.1729], link: null, country: "Brazil" },
